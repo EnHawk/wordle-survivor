@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Wordle Survivor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <header class="py-6 border-b border-[#3a3a3c] flex flex-col items-center">
+        <h1 class="text-2xl font-black tracking-tighter text-red-500">ANTI-WORDLE</h1>
+        <p class="text-[10px] text-gray-500 tracking-[0.3em] uppercase font-bold">Avoid the word or die trying</p>
+    </header>
+
+    <main class="flex-1 flex flex-col items-center justify-start p-4 overflow-hidden">
+        <div class="flex gap-12 mb-6 text-center bg-[#1e1e1f] p-4 rounded-2xl border border-gray-800">
+            <div>
+                <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1">Time Remaining</span>
+                <div id="timer" class="text-4xl font-black font-mono text-yellow-500">05:00</div>
+            </div>
+            <div class="border-l border-gray-800 pl-12">
+                <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1">Guesses Made</span>
+                <div id="score" class="text-4xl font-black text-white">0</div>
+            </div>
+        </div>
+
+        <div id="grid-scroll" class="flex-1 w-full max-w-xs overflow-y-auto scroll-container mb-4">
+            <div id="grid" class="flex flex-col gap-2 py-2"></div>
+            <div id="input-row" class="flex gap-2 justify-center mt-2">
+                <div class="tile" id="t-0"></div>
+                <div class="tile" id="t-1"></div>
+                <div class="tile" id="t-2"></div>
+                <div class="tile" id="t-3"></div>
+                <div class="tile" id="t-4"></div>
+            </div>
+        </div>
+    </main>
+
+    <div id="keyboard" class="max-w-[500px] mx-auto w-full px-2 pb-8">
+        <div class="flex mb-2">
+            <div class="key" data-key="Q">Q</div><div class="key" data-key="W">W</div><div class="key" data-key="E">E</div><div class="key" data-key="R">R</div><div class="key" data-key="T">T</div><div class="key" data-key="Y">Y</div><div class="key" data-key="U">U</div><div class="key" data-key="I">I</div><div class="key" data-key="O">O</div><div class="key" data-key="P">P</div>
+        </div>
+        <div class="flex mb-2 px-4">
+            <div class="key" data-key="A">A</div><div class="key" data-key="S">S</div><div class="key" data-key="D">D</div><div class="key" data-key="F">F</div><div class="key" data-key="G">G</div><div class="key" data-key="H">H</div><div class="key" data-key="J">J</div><div class="key" data-key="K">K</div><div class="key" data-key="L">L</div>
+        </div>
+        <div class="flex">
+            <div class="key !flex-[1.5]" data-key="ENTER">ENTER</div>
+            <div class="key" data-key="Z">Z</div><div class="key" data-key="X">X</div><div class="key" data-key="C">C</div><div class="key" data-key="V">V</div><div class="key" data-key="B">B</div><div class="key" data-key="N">N</div><div class="key" data-key="M">M</div>
+            <div class="key !flex-[1.5]" data-key="BACKSPACE">⌫</div>
+        </div>
+    </div>
+
+    <div id="end-modal" class="fixed inset-0 bg-black/95 z-[100] hidden flex flex-col items-center justify-center p-6 text-center">
+        <h2 id="end-status" class="text-6xl font-black text-red-600 mb-2 italic">ELIMINATED</h2>
+        <p id="end-subtext" class="text-gray-400 mb-10 uppercase tracking-[0.2em] text-sm">The target word caught up to you</p>
+        <div class="mb-10">
+            <span class="text-xs text-gray-500 block mb-2 uppercase font-bold">Target Word</span>
+            <div id="target-reveal" class="text-5xl font-mono font-black tracking-[0.4em] text-white"></div>
+        </div>
+        <div class="flex gap-8 mb-12">
+            <div class="bg-[#1e1e1f] p-6 rounded-2xl min-w-[140px] border border-gray-800">
+                <span class="text-[10px] text-gray-500 block mb-1 uppercase font-bold">Survivals</span>
+                <div id="final-score" class="text-5xl font-black text-white">0</div>
+            </div>
+            <div class="bg-[#1e1e1f] p-6 rounded-2xl min-w-[140px] border border-gray-800">
+                <span class="text-[10px] text-gray-500 block mb-1 uppercase font-bold">Time Used</span>
+                <div id="final-time" class="text-5xl font-black text-yellow-500">0:00</div>
+            </div>
+        </div>
+        <button onclick="location.reload()" class="bg-white text-black px-16 py-5 rounded-full font-black text-lg hover:bg-red-600 hover:text-white transition-all transform active:scale-95">RESTART MISSION</button>
+    </div>
+
+    <div id="toast" class="fixed top-32 left-1/2 -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-full font-bold hidden z-50 shadow-xl border-2 border-white/20"></div>
+
+    <script src="./index.js"></script>
+</body>
+</html>
